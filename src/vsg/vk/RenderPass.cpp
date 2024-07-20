@@ -148,6 +148,7 @@ RenderPass::RenderPass(Device* in_device, const Attachments& in_attachments, con
 
         VkRenderPassCreateInfo2 renderPassInfo = {};
         renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2;
+        renderPassInfo.flags = VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM;
         renderPassInfo.attachmentCount = static_cast<uint32_t>(attachments.size());
         renderPassInfo.pAttachments = copyAttachmentDescriptions(attachments);
         renderPassInfo.subpassCount = static_cast<uint32_t>(subpasses.size());
