@@ -112,8 +112,16 @@ void RenderGraph::accept(RecordTraversal& recordTraversal) const
         this_renderGraph->resized();
     }
 
+    // Initialize the VkRenderPassTransformBeginInfoQCOM structure
+    VkRenderPassTransformBeginInfoQCOM renderPassTransformBeginInfo = {
+        .sType = VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM,
+        .pNext = NULL,
+        .transform = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR
+    };
+
     VkRenderPassBeginInfo renderPassInfo = {};
     renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+    renderPassInfo.pNext = &renderPassTransformBeginInfo;
 
     if (framebuffer)
     {
