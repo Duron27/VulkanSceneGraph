@@ -112,17 +112,17 @@ void RenderGraph::accept(RecordTraversal& recordTraversal) const
         this_renderGraph->resized();
     }
 
-    // Initialize the VkRenderPassTransformBeginInfoQCOM structure
-    VkRenderPassTransformBeginInfoQCOM renderPassTransformBeginInfo = {
-        .sType = VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM,
-        .pNext = NULL,
-        .transform = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR
-    };
+    // Create a Vulkan instance, requesting all enabled layers or extensions
+    // available on the system
+    typedef struct VkRenderPassTransformBeginInfoQCOM {
+    VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM .sType;
+    void* pNest;
+    VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR transform; 
+    } VkRenderPassTransformBeginInfoQCOM;
 
     VkRenderPassBeginInfo renderPassInfo = {};
     renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-    renderPassInfo.pNext = &renderPassTransformBeginInfo;
-
+    
     if (framebuffer)
     {
         renderPassInfo.renderPass = renderPass ? *(renderPass) : *(framebuffer->getRenderPass());
