@@ -182,8 +182,7 @@ Swapchain::Swapchain(PhysicalDevice* physicalDevice, Device* device, Surface* su
     debug("     imageCount = ", imageCount);
 
     VkSwapchainCreateInfoKHR createInfo = {};
-    createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
-    createInfo.transform = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR;
+    createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;    
     createInfo.surface = *surface;
 
     createInfo.minImageCount = imageCount;
