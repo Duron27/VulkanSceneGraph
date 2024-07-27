@@ -79,7 +79,7 @@ VkSurfaceFormatKHR vsg::selectSwapSurfaceFormat(const SwapChainSupportDetails& d
     return details.formats[0];
 }
 
-VkExtent2D vsg::selectSwapExtent(const SwapChainSupportDetails& details, uint32_t width, uint32_t height)
+VkExtent2D vsg::selectSwapExtent(const SwapChainSupportDetails& details)
 {
     const VkSurfaceCapabilitiesKHR& capabilities = details.capabilities;
 
@@ -90,12 +90,11 @@ VkExtent2D vsg::selectSwapExtent(const SwapChainSupportDetails& details, uint32_
     else
     {
         VkExtent2D extent;
-        extent.width = std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, width));
-        extent.height = std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, height));
+        extent.width = std::max(capabilities.minImageExtent.width, std::min(capabilities.maxImageExtent.width, 1920));
+        extent.height = std::max(capabilities.minImageExtent.height, std::min(capabilities.maxImageExtent.height, 1080));
         return extent;
     }
 }
-
 VkPresentModeKHR vsg::selectSwapPresentMode(const SwapChainSupportDetails& details, VkPresentModeKHR preferredPresentMode)
 {
     // select requested presentMode if it's available.
